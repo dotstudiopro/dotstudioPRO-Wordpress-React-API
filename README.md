@@ -1,8 +1,3 @@
-API Namespace: dsp/{version}, i.e. dsp/v1
-
-Output filters:
-`dspapi_post_info_meta_key_filter`: Filter individual meta properties.
-
 # dotstudioPRO Wordpress API routes for React
 
 A Wordpress plugin that has all of the API routes used by React for data delivery.
@@ -27,3 +22,17 @@ Upload the zip file via the Plugin menu > Add Plugin
 ## Authors
 
 * **Matt Armstrong** - [dotstudioPRO](https://dotstudiopro.com)
+
+## Namespace
+
+API Namespace: dsp/{version}, i.e. dsp/v1
+
+*Current Version*: `v1`
+
+## Output filters:
+
+`dspapi_post_info_meta_key_filter`: Filter individual meta properties.  This filter exists within a `foreach($meta_array = $key => $meta)` loop.
+*Args*: `$meta`, `$key`, `$image_size='thumb'`
+
+`dspapi_post_filter`: Filter post object.  This filter provides the entire `$post` object after `meta` and various other properties have been added to it.
+*Args*: `$post`
