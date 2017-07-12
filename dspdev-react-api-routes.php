@@ -21,11 +21,6 @@ require_once("v1/functions-v1.php");
 require_once("v1/schema-v1.php");
 require_once("v1/routes-v1.php");
 
-// Include the 1st version of the ABS-Specific API
-require_once("v1/abs-specific/functions-v1.php");
-require_once("v1/abs-specific/schema-v1.php");
-require_once("v1/abs-specific/routes-v1.php");
-
 // load css into the website's front-end
 function dspapi_api_routes_enqueue_style() {
     wp_enqueue_style( 'dspapi-api-routes-style', plugins_url( 'styles/style.css', __FILE__ ) );
