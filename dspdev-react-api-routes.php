@@ -1,7 +1,7 @@
 <?php
 
 /*
-** Plugin Name: API Routes
+** Plugin Name: dotstudioPRO React API Routes
 ** Version: 1.00
 ** Author: dotstudioPRO
 ** Author URI: http://dotstudiopro.com
