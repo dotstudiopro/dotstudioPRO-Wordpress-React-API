@@ -2,7 +2,7 @@
 
 /*
 ** Plugin Name: dotstudioPRO React API Routes
-** Version: 1.00
+** Version: 1.01
 ** Author: dotstudioPRO
 ** Author URI: http://dotstudiopro.com
 */
@@ -51,7 +51,7 @@ if(!function_exists('swagger_rest_api_init')){
 
 	}
 
-	add_action( 'rest_api_init', 'swagger_rest_api_init', 11 );
+	add_action( 'rest_api_init', 'swagger_rest_api_init', 10 );
 }
 
 /** Add Menu Entry **/
