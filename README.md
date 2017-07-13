@@ -18,6 +18,7 @@ Upload the zip file via the Plugin menu > Add Plugin
 
 * [Wordpress](http://www.wordpress.org) - CMS
 * [Swagger Generator](https://github.com/starfishmod/WPAPI-SwaggerGenerator) - A Swagger-based generator class for parsing the API endpoints into something readable. Used in conjunction with [Swagger UI Theme](https://github.com/dufabricio/WP-SwaggerUI/tree/master/wordpress/wp-content/themes/swaggertheme) to get a Swagger theme working on Wordpress.
+* [Plugin Update Checker](https://github.com/YahnisElsts/plugin-update-checker) - A really simple plugin update checker that also has a server-side component that makes the process really fluid.
 
 ## Authors
 

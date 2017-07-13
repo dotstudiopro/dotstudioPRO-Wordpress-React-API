@@ -10,6 +10,14 @@
 if (!defined('ABSPATH'))
     die();
 
+// Plugin Update Checker
+require 'plugin-update-checker/plugin-update-checker.php';
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+	'http://updates.wordpress.dotstudiopro.com/wp-update-server/?action=get_metadata&slug=dspdev-react-api-routes',
+	__FILE__,
+	'dspdev-react-api-routes'
+);
+
 // Plugin functions outside of routing
 require_once("functions.php");
 
@@ -27,29 +35,56 @@ function dspapi_api_routes_enqueue_style() {
 }
 add_action( 'wp_enqueue_scripts', 'dspapi_api_routes_enqueue_style' );
 
-/*** SWAGGER DOCS FOR WP: https://github.com/starfishmod/WPAPI-SwaggerGenerator ***/
+if(!function_exists('swagger_rest_api_init')){
 
-function swagger_rest_api_init() {
+	/*** SWAGGER DOCS FOR WP: https://github.com/starfishmod/WPAPI-SwaggerGenerator ***/
 
-	if ( class_exists( 'WP_REST_Controller' )
-		&& ! class_exists( 'WP_REST_Swagger_Controller' ) ) {
-		require_once dirname( __FILE__ ) . '/lib/class-wp-rest-swagger-controller.php';
+	function swagger_rest_api_init() {
+
+		if ( class_exists( 'WP_REST_Controller' )
+			&& ! class_exists( 'WP_REST_Swagger_Controller' ) ) {
+			require_once dirname( __FILE__ ) . '/lib/class-wp-rest-swagger-controller.php';
+		}
+
+		$swagger_controller = new WP_REST_Swagger_Controller();
+		$swagger_controller->register_routes();
+
 	}
 
-	$swagger_controller = new WP_REST_Swagger_Controller();
-	$swagger_controller->register_routes();
+	add_action( 'rest_api_init', 'swagger_rest_api_init', 11 );
+}
+
+/** Add Menu Entry **/
+function dspdev_react_api_routes_menu() {
+
+	add_menu_page( 'React API Options', 'React API Options', 'manage_options', 'dspdev-react-api-routes', 'dspdev_react_api_routes_menu_page', plugins_url( 'react-logo.png', __FILE__ ) );
 
 }
 
-add_action( 'rest_api_init', 'swagger_rest_api_init', 11 );
+add_action( 'admin_menu', 'dspdev_react_api_routes_menu' );
 
-function dspapi_namespace(){
-	die("YUP!");
+// Set up the page for the plugin, pulling the content based on various $_GET global variable contents
+function dspdev_react_api_routes_menu_page() {
+	if ( !current_user_can( 'manage_options' ) )  {
+		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+	}
+
+	echo "<div class='wrap'>";
+
+
+	include("templates/menu.tpl.php");
+
+
+	echo "</div>";
+
+}
+/** End Menu Entry **/
+
+function dspdev_save_react_api_routes_options(){
+	if(!empty($_POST['dspdev-save-react-api-routes-options'])){
+		update_option('dspapi-api-namespace', $_POST['dspapi-api-namespace']);
+	}
+
 }
 
-function dspapi_namespace_settings(){
-	register_setting('general', 'dspapi_namespace', 'esc_attr');
-	add_settings_field( "dspapi_namespace", "DSP API Namespace", 'dspapi_namespace', "general", "dspapi_setting-blah", array('label_for' => 'dspapi_setting-id') );
-}
-
-add_action( 'admin_init', 'dspapi_namespace_settings', 11 );
+add_action("init", "dspdev_save_react_api_routes_options");
