@@ -51,7 +51,7 @@ if(!function_exists('swagger_rest_api_init')){
 
 	}
 
-	add_action( 'rest_api_init', 'swagger_rest_api_init', 0 );
+	add_action( 'rest_api_init', 'swagger_rest_api_init', 9 );
 }
 
 /** Add Menu Entry **/
