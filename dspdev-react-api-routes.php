@@ -35,24 +35,21 @@ function dspapi_api_routes_enqueue_style() {
 }
 add_action( 'wp_enqueue_scripts', 'dspapi_api_routes_enqueue_style' );
 
-if(!function_exists('swagger_rest_api_init')){
+/*** SWAGGER DOCS FOR WP: https://github.com/starfishmod/WPAPI-SwaggerGenerator ***/
 
-	/*** SWAGGER DOCS FOR WP: https://github.com/starfishmod/WPAPI-SwaggerGenerator ***/
+function swagger_rest_api_init() {
 
-	function swagger_rest_api_init() {
-
-		if ( class_exists( 'WP_REST_Controller' )
-			&& ! class_exists( 'WP_REST_Swagger_Controller' ) ) {
-			require_once dirname( __FILE__ ) . '/lib/class-wp-rest-swagger-controller.php';
-		}
-
-		$swagger_controller = new WP_REST_Swagger_Controller();
-		$swagger_controller->register_routes();
-
+	if ( class_exists( 'WP_REST_Controller' )
+		&& ! class_exists( 'WP_REST_Swagger_Controller' ) ) {
+		require_once dirname( __FILE__ ) . '/lib/class-wp-rest-swagger-controller.php';
 	}
 
-	add_action( 'rest_api_init', 'swagger_rest_api_init', 9 );
+	$swagger_controller = new WP_REST_Swagger_Controller();
+	$swagger_controller->register_routes();
+
 }
+
+add_action( 'rest_api_init', 'swagger_rest_api_init', 9 );
 
 /** Add Menu Entry **/
 function dspdev_react_api_routes_menu() {
