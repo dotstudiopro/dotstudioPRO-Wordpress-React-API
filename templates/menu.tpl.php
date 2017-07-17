@@ -17,7 +17,7 @@
          </tbody>
          <tfoot>
             <tr>
-               <td>
+               <td colspan='2'>
                   <button class='button button-primary'>Save</button>
                </td>
             </tr>

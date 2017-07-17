@@ -150,7 +150,7 @@ function dspapi_get_post_info($post, $image_size = "thumb"){
   return apply_filters( 'dspapi_post_filter', $post );
 }
 
-function dspabs_json_decode($json){
+function dspapi_json_decode($json){
   // Deal with the multitude of slashes that could exist on things
   return str_replace("\\\\", "\\", str_replace("\\\"", "\"", str_replace("\\'", "'", json_decode($json))));
 }
