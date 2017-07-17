@@ -88,3 +88,10 @@ function dspdev_save_react_api_routes_options(){
 }
 
 add_action("init", "dspdev_save_react_api_routes_options");
+
+function dspdev_react_icon_styles(){
+	?>
+	<style type="text/css">.toplevel_page_dspdev-react-api-routes > .wp-menu-image.dashicons-before > img{padding: 6px 0px 0px 0px!important;}</style>
+	<?php
+}
+add_action('admin_head', 'dspdev_react_icon_styles', 99);
