@@ -102,6 +102,7 @@ function dspapi_get_post_info($post, $image_size = "thumb"){
 
   // Parse meta, removing unnecessary keys and setting up images if they exist
   foreach($meta as $key=>$m){
+    if(empty($m[0])) continue;
     $m = apply_filters( 'dspapi_post_info_meta_key_filter', $m, $key, $image_size );
     if(!$m) continue;
     $meta_array[$key] = $m;
