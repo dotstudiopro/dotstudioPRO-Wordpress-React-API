@@ -88,6 +88,10 @@ function dspapi_get_post_info($post, $image_size = "thumb"){
   // If post isn't a post object, don't do anything
   if(!is_object($post)) return $post;
 
+  $saved_post = get_transient( "saved_post:$post->ID" );
+
+  if($saved_post) return $saved_post;
+
   $taxonomy = $post->post_type ? $post->post_type . "_categories" : "";
 
   $post->post_content = apply_filters( 'the_content', $post->post_content );
@@ -148,7 +152,11 @@ function dspapi_get_post_info($post, $image_size = "thumb"){
   if(!empty($taxonomy->errors) || !$taxonomy) $taxonomy = null;
   $post->taxonomy = $taxonomy;
 
-  return apply_filters( 'dspapi_post_filter', $post );
+  $filtered_post = apply_filters( 'dspapi_post_filter', $post );
+
+  set_transient( "saved_post:$post->ID", $filtered_post, get_option('dspapi_transient_cache_timeout', 300) );
+
+  return $filtered_post;
 }
 
 function dspapi_json_decode($json){

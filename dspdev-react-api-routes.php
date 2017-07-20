@@ -2,7 +2,7 @@
 
 /*
 ** Plugin Name: dotstudioPRO React API Routes
-** Version: 1.03
+** Version: 1.04
 ** Author: dotstudioPRO
 ** Author URI: http://dotstudiopro.com
 */
@@ -83,6 +83,7 @@ function dspdev_react_api_routes_menu_page() {
 function dspdev_save_react_api_routes_options(){
 	if(!empty($_POST['dspdev-save-react-api-routes-options'])){
 		update_option('dspapi-api-namespace', $_POST['dspapi-api-namespace']);
+		update_option('dspapi_transient_cache_timeout', $_POST['dspapi_transient_cache_timeout']);
 	}
 
 }
