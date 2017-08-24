@@ -132,6 +132,9 @@ function dspapi_get_post_info($post, $image_size = "thumb"){
     $userFiltered->$k = $v;
   }
 
+  // Set up the excerpt
+  $post->post_excerpt = get_the_excerpt($post);
+
   // Get author headshot
   $headshot = get_user_meta( $post->post_author, "author_headshot", true );
   $author_img = wp_get_attachment_image_src($headshot, 'thumb');
