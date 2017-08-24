@@ -7,6 +7,15 @@
          <tbody>
             <tr>
                <td>
+                  <span>API Key</span>
+                  <span class='description'>The api key to access the API.</span>
+               </td>
+               <td>
+                  <input type='text' name='dspapi-api-key' value='<?php echo get_option("dspapi-api-key") ?>' />
+               </td>
+            </tr>
+            <tr>
+               <td>
                   <span>API Namespace</span>
                   <span class='description'>The namespace for the API.  There is no need to change this unless we need to whitelist the API routes.</span>
                </td>

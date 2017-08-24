@@ -3,6 +3,10 @@
 /*** Get new API token ***/
 function dspapi_get_token(){
 
+    $key = get_option('dspapi-api-key');
+
+    if(!$key) return "";
+
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -14,7 +18,6 @@ function dspapi_get_token(){
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => "POST",
       CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"key\"\r\n\r\n$key\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
-      // ABS API key: 464f9d1621f0799f4c4b7a2e884b21e4be81d222
       // Automatic account API Key: 32a70a32da27b30a10fe546ead126f0778c5f00f
       CURLOPT_HTTPHEADER => array(
         "cache-control: no-cache",
@@ -47,7 +50,7 @@ function dspapi_api_search($term){
 	$ttl = $exp ? $exp - time() : 0;
 
 	// If we have less than a day to go before expiring, renew
-	if(!$exp || $ttl < (60*60*24)){
+	if(!$token || !$exp || $ttl < (60*60*24)){
 	  $token = dspapi_get_token();
 	  update_option('dspapi_auth_token', $token);
 	  // Expires in 30 days
@@ -133,7 +136,7 @@ function dspapi_get_post_info($post, $image_size = "thumb"){
   }
 
   // Set up the excerpt
-  $post->post_excerpt = get_the_excerpt($post);
+  $post->post_excerpt = implode(' ', array_slice(explode(' ', wp_strip_all_tags($post->post_content)), 0, 35));
 
   // Get author headshot
   $headshot = get_user_meta( $post->post_author, "author_headshot", true );
