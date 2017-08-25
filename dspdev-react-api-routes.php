@@ -2,7 +2,7 @@
 
 /*
 ** Plugin Name: dotstudioPRO React API Routes
-** Version: 1.07
+** Version: 1.08
 ** Author: dotstudioPRO
 ** Author URI: http://dotstudiopro.com
 */

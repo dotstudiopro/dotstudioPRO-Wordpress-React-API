@@ -91,11 +91,11 @@ function dspapi_get_post_info($post, $image_size = "thumb"){
   // If post isn't a post object, don't do anything
   if(!is_object($post)) return $post;
 
-  $saved_post = get_transient( "saved_post:$post->ID" );
+  // $saved_post = get_transient( "saved_post:$post->ID" );
 
-  $decoded = json_decode($saved_post);
+  // $decoded = json_decode($saved_post);
 
-  if($saved_post && $decoded && $decoded->meta) return $decoded;
+  // if($saved_post && $decoded && $decoded->meta) return $decoded;
 
   $taxonomy = $post->post_type ? $post->post_type . "_categories" : "";
 
