@@ -95,7 +95,7 @@ function dspapi_get_post_info($post, $image_size = "thumb"){
 
   $decoded = json_decode($saved_post);
 
-  if($saved_post &&  $decoded) return $decoded;
+  if($saved_post && $decoded && $decoded->meta) return $decoded;
 
   $taxonomy = $post->post_type ? $post->post_type . "_categories" : "";
 
